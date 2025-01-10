@@ -146,6 +146,9 @@ pub struct Config {
     /// Configuration for the minimum message size for which IDONTWANT messages are send in the mesh.
     /// Lower the value reduces the optimization effect of the IDONTWANT messages.
     pub idontwant_message_size_threshold: usize,
+
+    /// Whether to send EIP 7636 information to clients.
+    pub send_eip_7636_info: bool,
 }
 
 impl Config {
@@ -358,6 +361,7 @@ impl Default for Config {
             invalid_block_storage: None,
             inbound_rate_limiter_config: None,
             idontwant_message_size_threshold: DEFAULT_IDONTWANT_MESSAGE_SIZE_THRESHOLD,
+            send_eip_7636_info: true,
         }
     }
 }

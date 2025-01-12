@@ -8,7 +8,7 @@ use crate::types::{Enr, EnrAttestationBitfield, EnrSyncCommitteeBitfield};
 use crate::NetworkConfig;
 use alloy_rlp::bytes::Bytes;
 use libp2p::identity::Keypair;
-use lighthouse_version::VERSION;
+use lighthouse_version::{version, VERSION};
 use slog::{debug, warn};
 use ssz::{Decode, Encode};
 use ssz_types::BitVector;
@@ -191,15 +191,14 @@ pub fn build_enr<E: EthSpec>(
 
     // Add EIP 7636 client information
     if config.send_eip_7636_info {
-        let version = VERSION.split("/").collect::<Vec<&str>>();
-        builder.client_info(
-            version.first().unwrap_or(&"Lighthouse").to_string(),
-            version
-                .get(1)
-                .unwrap_or(&env!("CARGO_PKG_VERSION"))
-                .to_string(),
-            None,
-        );
+        let name = VERSION
+            .split("/")
+            .collect::<Vec<&str>>()
+            .first()
+            .unwrap_or(&"Lighthouse")
+            .to_string();
+
+        builder.client_info(name, version().to_string(), None);
     }
 
     // Add QUIC fields to the ENR.

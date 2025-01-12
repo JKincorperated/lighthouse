@@ -48,6 +48,25 @@ pub fn version_with_platform() -> String {
     format!("{}/{}-{}", VERSION, Target::arch(), Target::os())
 }
 
+/// Returns semantic versioning information only.
+///
+/// ## Example
+///
+/// `1.5.1`
+pub fn version() -> &'static str {
+    let mut out = "";
+    let mut start = 0;
+    for (i, c) in VERSION.chars().enumerate() {
+        if c == '-' {
+            break;
+        } else if c == 'v' {
+            start = i + 1;
+        }
+        out = &VERSION[start..i + 1];
+    }
+    out
+}
+
 #[cfg(test)]
 mod test {
     use super::*;
@@ -62,6 +81,16 @@ mod test {
             re.is_match(VERSION),
             "version doesn't match regex: {}",
             VERSION
+        );
+    }
+
+    #[test]
+    fn semantic_version_formatting() {
+        let re = Regex::new(r"^[0-9]+\.[0-9]+\.[0-9]+").unwrap();
+        assert!(
+            re.is_match(version()),
+            "semantic version doesn't match regex: {}",
+            version()
         );
     }
 }

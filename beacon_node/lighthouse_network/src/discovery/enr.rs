@@ -191,14 +191,7 @@ pub fn build_enr<E: EthSpec>(
 
     // Add EIP 7636 client information
     if !config.private {
-        let name = VERSION
-            .split("/")
-            .collect::<Vec<&str>>()
-            .first()
-            .unwrap_or(&"Lighthouse")
-            .to_string();
-
-        builder.client_info(name, version().to_string(), None);
+        builder.client_info(client_name().to_string(), version().to_string(), None);
     }
 
     // Add QUIC fields to the ENR.

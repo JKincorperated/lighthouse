@@ -54,18 +54,16 @@ pub fn version_with_platform() -> String {
 ///
 /// `1.5.1`
 pub fn version() -> &'static str {
-    let mut out = "";
-    let mut start = 0;
-    for (i, c) in VERSION.chars().enumerate() {
-        if c == '-' {
-            break;
-        } else if c == 'v' {
-            start = i + 1;
-        }
-        out = &VERSION[start..i + 1];
-    }
-    out
+    "6.0.1"
 }
+
+/// Returns the name of the current client running.
+///
+/// This will usually be "Lighthouse"
+pub fn client_name() -> &'static str {
+    "Lighthouse"
+}
+
 
 #[cfg(test)]
 mod test {

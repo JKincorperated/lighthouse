@@ -64,7 +64,6 @@ pub fn client_name() -> &'static str {
     "Lighthouse"
 }
 
-
 #[cfg(test)]
 mod test {
     use super::*;

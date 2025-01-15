@@ -8,7 +8,7 @@ use crate::types::{Enr, EnrAttestationBitfield, EnrSyncCommitteeBitfield};
 use crate::NetworkConfig;
 use alloy_rlp::bytes::Bytes;
 use libp2p::identity::Keypair;
-use lighthouse_version::{version, client_name};
+use lighthouse_version::{client_name, version};
 use slog::{debug, warn};
 use ssz::{Decode, Encode};
 use ssz_types::BitVector;
